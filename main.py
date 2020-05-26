@@ -16,10 +16,10 @@ for index, row in asx_data.iterrows():
 
     history = afi.history(start=start_date)
 
-    for index, row in history.iterrows():
-        dividend = row['Dividends']
+    for date, yahoo_row in history.iterrows():
+        dividend = yahoo_row['Dividends']
         if dividend > 0.00:
-            output_df.loc[-1] = [ticker, index, dividend]
+            output_df.loc[-1] = [ticker, date, dividend]
             output_df.index = output_df.index+1
             output_df = output_df.sort_index()
             print('found dividend for' + ticker)
